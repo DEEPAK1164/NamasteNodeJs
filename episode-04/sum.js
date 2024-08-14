@@ -2,22 +2,30 @@
 //so we need to export the modules
 
 console.log("Sum module get exeuted");
-var x="var x from sum module";
-function calSum(x,y){
+
+//x is defined in non strict mode which is allowed
+x="var x from sum module";
+function calSumFromSum(x,y){
     console.log(x+y);
 }
 
+
+
 // module.exports={
-//     calSum:calSum,
+//     calSumFromSum:calSumFromSum,
 //     x:x
 // };
 
 //OR
 
-
 module.exports={
-    calSum,
+    calSumFromSum,
     x,
 };
+
+//OR
+// console.log(module.exports) // => {}
+// module.exports.calSumFromSum=calSumFromSum;
+// module.exports.x=x;
 
 
