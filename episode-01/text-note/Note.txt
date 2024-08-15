@@ -1,13 +1,1 @@
-"Any application that can be written
- in JavaScript will eventually be 
- written in JavaScript"
-- bY Jeff Atwood, 2007 
-(stackoverflo founder)
-
-
-- Nodejs is a Javascript runtime
- built on Chrome's v8 engine
-
- -1st version of Nodejs was released in 2009
- and NodeJs is developed by "Ryan Dahl"
-
+Please refer my blog at medium : https://medium.com/@2001dkmaurya/history-of-nodejs-63782f82ee69
