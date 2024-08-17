@@ -1,5 +1,3 @@
-[![DEEPAK MAURYA](https://miro.medium.com/v2/resize:fill:88:88/1*Hsa_iUOjZkxf1J090IHk2Q.jpeg)](https://medium.com/@2001dkmaurya?source=post_page-----63782f82ee69--------------------------------)
-
 ![](https://miro.medium.com/v2/resize:fit:875/1*EG3BmaV23SgTC1C25FZErQ.jpeg)
 
 NodeJs - 01 : History of NodeJs
