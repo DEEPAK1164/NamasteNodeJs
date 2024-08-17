@@ -1,7 +1,5 @@
 ![](https://miro.medium.com/v2/resize:fit:875/1*AjqYUQHi2RkP7cFacapiDw.jpeg)
 
-NodeJs - 03 : Let’s Write Code
-
 **NodeJs - 03 : Let’s Write Code**
 
 1.  **Installing Node.js**  
