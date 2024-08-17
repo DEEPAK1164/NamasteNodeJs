@@ -100,6 +100,6 @@ console.log(c);
 
 is always the global object, regardless of where it is accessed. It was introduced in ECMAScript 2020 to provide a standardized way to refer to the global object in any environment (browsers, Node.js, etc.).
 
--   In browsers, `**globalThis**` is equivalent to `**window**`.
--   In Node.js, `**globalThis**` is equivalent to `**global**`.
+-   In browsers, `globalThis` is equivalent to `window`.
+-   In Node.js, `globalThis` is equivalent to `global`.
 -   It provides a consistent way to access the global object without worrying about the environment.
