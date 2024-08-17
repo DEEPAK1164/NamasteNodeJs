@@ -53,7 +53,7 @@ You can do this by right-clicking on the folder and selecting “Open with Code�
 
 To create a new file, right-click inside the folder in the VS Code Explorer pane, select “New File,” and name the file `app.js`
 
-**4\. Now, let’s write some basic JavaScript code inside the** `**app.js**` **file**
+**4\. Now, let’s write some basic JavaScript code inside the** `app.js` **file**
 
 ```js
 let name = "Node JS 03";
