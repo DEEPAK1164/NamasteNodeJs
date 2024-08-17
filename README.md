@@ -2,7 +2,7 @@
 
 ![Namaste Node.js Poster](https://do6gp1uxl3luu.cloudfront.net/banner+and+logos/namaste-node.webp)
 
-This repository contains detailed notes from the **Namaste Node.js** course by **Akshay Saini**. The notes cover key concepts, in-depth explanations, and code examples that help demystify how Node.js works under the hood. Perfect for anyone looking to deepen their understanding of Node.js and its core principles.
+This repository features comprehensive notes from the **Namaste Node.js** course by **Akshay Saini**. It offers detailed insights, key concepts, and code examples that illuminate the inner workings of Node.js. It's an excellent resource for anyone aiming to deepen their understanding of Node.js and its foundational principles.
 
 Feel free to contribute your unique contents
 and use these resourses like digital notes,
