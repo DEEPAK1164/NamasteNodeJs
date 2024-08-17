@@ -55,12 +55,13 @@ To create a new file, right-click inside the folder in the VS Code Explorer pane
 
 **4\. Now, let’s write some basic JavaScript code inside the** `**app.js**` **file**
 
-```
-<span id="f55e" data-selectable-paragraph="">
-<span>let</span> name = <span>"Node JS 03"</span>;
-<br><span>Let</span> a = <span>5.</span><br><span>let</span> b = <span>10</span>;
-<br><span>let</span> c = a + b.<br><span>console</span>.<span>log</span>(name);
-<br><span>console</span>.<span>log</span>(c)</span>
+```js
+let name = "Node JS 03";
+let a = 5;
+let b = 10;
+let c = a + b;
+console.log(name);
+console.log(c);
 
 ```
 
