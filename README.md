@@ -1,4 +1,4 @@
-# Namaste Node.js:everything at one place📚
+# Namaste Node.js:everything at one place 🚀
 
 ![Namaste Node.js Poster](https://do6gp1uxl3luu.cloudfront.net/banner+and+logos/namaste-node.webp)
 
