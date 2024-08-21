@@ -42,8 +42,8 @@ Here’s a **brief explanation** of how the provided **CommonJS** code works:
 
 1.**Importing the Module**:
 
-`const { calSumFromSum, x } = require('./sum.js');`
-
+```javascript
+const { calSumFromSum, x } = require('./sum.js');
 
 -   This line imports two items (`calSumFromSum` function and `x` variable) from the `sum.js` module using the `require` function.
 -   `require` resolves the path to `./sum.js`, executes the file, and returns the exported content.
