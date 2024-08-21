@@ -4,13 +4,14 @@ const crypto=require("crypto");
 //above require method will run in 
 //synchronous fashion in commonJs
 
+console.log("Start");
+
 //readFileSync is blocking the main thread
 fs.readFileSync('./file.txt','utf-8',(err,data)=>{
     console.log("File data fetched synchronously: ", data);
 })
 
 //just below console will execute after file read
-console.log("Hello! Async");
 var a=1078698;
 var b=20986;
 
@@ -28,8 +29,8 @@ https.get("https://dummyjson.com/products/1",(res)=>{
 });
 
 setTimeout(()=>{
-    console.log("settimeout called after 5 sec")
-},5000);
+    console.log("settimeout called after 0 sec")
+},0);
 
 fs.readFile('./file.txt','utf-8',(err,data)=>{
     console.log("File data is: ",data);
@@ -42,3 +43,4 @@ function mulFn(x,y){
 
 var c=mulFn(a,b);
 console.log("multiplication result is: ",c);
+console.log("End")

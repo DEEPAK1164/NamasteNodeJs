@@ -6,8 +6,7 @@ setImmediate(()=>{console.log("setImmediate")});
 fs.readFile('./file.txt','utf-8',(err,data)=>{
     console.log("file reading cb",data);
 })
-
-setTimeout(()=>{console.log("timer expired")},9000);
+setTimeout(()=>{console.log("timer expired")},5000);
 
 function printA(){
     console.log("a = ",a);

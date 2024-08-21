@@ -1,16 +1,16 @@
 
-// {
-//    "type": "commonjs"
-// }
-const {calSumFromSum,x}=require('./sum.js');
-var name="Depak Maurya";
-var a=10;
-var b=15;
+// // {
+// //    "type": "commonjs"
+// // }
+// const {calSumFromSum,x}=require('./sum.js');
+// var name="Depak Maurya";
+// var a=10;
+// var b=15;
 
-calSumFromSum(a,b);
-console.log(x);
+// calSumFromSum(a,b);
+// console.log(x);
 
-console.log(name,a,b);
+// console.log(name,a,b);
 
 
 
@@ -31,17 +31,17 @@ console.log(name,a,b);
 //................................................
 
 
-//{
-   // "type": "module"
-//}
+// {
+//    "type": "module"
+// }
 
-// import { calSumFromXyz,x} from "./xyz.js";
-// var name="Depak Maurya";
-// var a=10;
-// var b=15;
+import { calSumFromXyz,x} from "./xyz.js";
+var name="Depak Maurya";
+var a=10;
+var b=15;
 
-// calSumFromXyz(a,b);
-// console.log(x);
+calSumFromXyz(a,b);
+console.log(x);
 
-// console.log(name,a,b);
+console.log(name,a,b);
 

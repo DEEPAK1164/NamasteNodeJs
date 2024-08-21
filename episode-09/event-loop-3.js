@@ -19,9 +19,3 @@ function printA(){
 
 printA();
 console.log("last line of file");
-
-//A=10
-//last line of file
-//timer expired
-
-
