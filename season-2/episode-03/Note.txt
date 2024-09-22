@@ -1,0 +1,10 @@
+version of package:"4.19.2"
+=>[major.minor.patch]
+project starts from version 1.0.0
+patch=>very small change or bug fix (1.0.1)
+minor change => pushing some feature inside express
+but backward compatible (1.1.1)
+major change=>not backward compatible can break the application
+^ carot => our project will get automatically upgraded to newwer changes if 
+minor or patch changes
+~ telda ?? HW 

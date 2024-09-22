@@ -1,0 +1,24 @@
+{
+  "name": "dev-tinder",
+  "version": "1.0.0",
+  "description": "tinder for devs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node src/app.js",
+     "dev":"nodemon src/app.js"
+
+
+  },
+  "keywords": [
+    "mongodb",
+    "express",
+    "react",
+    "node"
+  ],
+  "author": "Deepak Maurya",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
