@@ -1,0 +1,10 @@
+// explore mongoose library
+https://www.npmjs.com/package/mongoose
+note 1st connect to db then call app.listen
+
+-create a free cluster on mongoDB atlas 
+-install mongoose library
+-connect application with db "connection url"
+-call the connectDB fn and connect to DB before starting application on 7777
+-create a userSchema and User Model
+-create /signup api to add data to db and test on postman
