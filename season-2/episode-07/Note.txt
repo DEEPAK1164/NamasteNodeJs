@@ -1,0 +1,16 @@
+Difference between JSON and JavaScript
+JavaScript Object: A JavaScript object is a data
+ structure that allows you to store key-value pairs.
+ It's used to organize and manipulate data in JavaScript programs.
+
+ JSON (JavaScript Object Notation): JSON is a lightweight data-interchange 
+ format that is used to store and transfer data. 
+ It’s essentially a string representation of a JavaScript object, 
+ used for communication between servers and web applications.
+
+ -add express.json middleware to your app
+ -make your signup api dynamic to receive data from end user
+ - API-Get user by email
+ - API- Feed API- GET/feed-get all the users from the db
+ - try getById also
+ - try yourself : API get userById
