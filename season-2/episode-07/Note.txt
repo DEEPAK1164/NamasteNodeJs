@@ -18,3 +18,5 @@ JavaScript Object: A JavaScript object is a data
  - difference bw patch and put
  -update user by id API
  -read model docs of mongoose
+ -read about options in mongoose patch method
+ -update user by email
