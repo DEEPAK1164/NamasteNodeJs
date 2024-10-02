@@ -14,3 +14,7 @@ JavaScript Object: A JavaScript object is a data
  - API- Feed API- GET/feed-get all the users from the db
  - try getById also
  - try yourself : API get userById
+ -create delete user API
+ - difference bw patch and put
+ -update user by id API
+ -read model docs of mongoose
