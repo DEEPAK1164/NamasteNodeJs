@@ -10,16 +10,11 @@ app.use(express.json()); // Example middleware to handle JSON requests
 
 //signup api to add data to DB.
 app.post('/signup',async (req,res)=>{
-
-  
-
-
   //req is request which postman has sent to us
   //and express has converted this request to an object
   //and it is given to us to use it and data which we send 
   //post man body is also the part of this request object
   //console.log(req);
-
 
     // console.log(req.body); // output is undefined coz server is not able to read Json data
     //to read json data we need help of middleware which check the incomming 
@@ -31,7 +26,7 @@ app.post('/signup',async (req,res)=>{
     await user.save();
     res.send("User Added successfully!");
     }catch (err){
-      res.status(400).send("Error saving the user:",err?.message);
+      res.status(400).send(`Error saving the user: ${err?.message}`);
     }
 })
 
