@@ -101,16 +101,27 @@ const userId=req.body.userId;
 const data=req.body;
 // console.log(data);
 try{
-const user=await User.findByIdAndUpdate({_id:userId},data,{returnDocument:"afterUpdate"});
+const user=await User.findByIdAndUpdate({_id:userId},data,{returnDocument:"afterUpdate",runValidators:true});
 console.log(user);
 res.send("User updated successfully!")
 
 }catch(err){
- res.status(400).send("Something went wrong!")
+ res.status(400).send("Something went wrong can't update! "+err.message)
 }
 
 
 })
+
+
+// Delete all users API - DELETE /deleteAll
+app.delete('/deleteAll', async (req, res) => {
+  try {
+    const result = await User.deleteMany({});
+    res.send(`Successfully deleted ${result.deletedCount} users.`);
+  } catch (err) {
+    res.status(400).send(`Error deleting users: ${err?.message}`);
+  }
+});
 
 
 // Connect to db 1st then listen to server
