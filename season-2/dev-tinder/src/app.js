@@ -96,21 +96,45 @@ if(!user)
 })
 
 //it ignores the field which are not present in the schema
-app.patch('/update',async(req,res)=>{
-const userId=req.body.userId;
-const data=req.body;
-// console.log(data);
-try{
-const user=await User.findByIdAndUpdate({_id:userId},data,{returnDocument:"afterUpdate",runValidators:true});
-console.log(user);
-res.send("User updated successfully!")
+app.patch('/update/:userId', async (req, res) => {
+  const userId = req.params?.userId;
+  const data = req.body;
 
-}catch(err){
- res.status(400).send("Something went wrong can't update! "+err.message)
-}
+  try {
+    const ALLOWED_UPDATES = [
+      "userId",
+      "photoUrl",
+      "about",
+      "gender",
+      "age",
+      "skills",
+    ];
 
+    // Correcting the check: return the result of the include check
+    const isUpdatesAllowed = Object.keys(data).every((key) => {
+      return ALLOWED_UPDATES.includes(key); // add return here
+    });
 
-})
+    if (!isUpdatesAllowed) {
+      throw new Error("Update not Allowed!");
+    }
+
+    const user = await User.findByIdAndUpdate(
+      { _id: userId },
+      data,
+      { returnDocument: "after", runValidators: true } // changed 'afterUpdate' to 'after'
+    );
+    
+    if (!user) {
+      return res.status(404).send("User not found!");
+    }
+
+    res.send("User updated successfully!");
+  } catch (err) {
+    res.status(400).send("Something went wrong, can't update! " + err.message);
+  }
+});
+
 
 
 // Delete all users API - DELETE /deleteAll

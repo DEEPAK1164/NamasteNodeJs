@@ -5,3 +5,8 @@ HW
 -create a custom validate function for gender
 -Improve the DB schema
 -Add timestamp to the userSchema
+
+-API LEVEL VALIDATION
+-I dont want to allow my user to change their email id after signup
+- DATA Sanitization add api level validation on Patch request & signup post api-add api validation for each field
+-npm library Validator for email use it (npm i validator )
