@@ -2,27 +2,27 @@ const express = require('express');
 const connectDB = require('./config/database'); // Import the database connection
 const User = require('./models/user');
 const app = express();
+const {validateSignUpData}=require('./utils/validation');
+const bcrypt=require("bcrypt");
 // Middleware (if any)
 app.use(express.json()); // Example middleware to handle JSON requests
-//it reads json object and converts to js object and add js object back to req object in the body now my
-//req.body contains js object 
 
-
-//signup api to add data to DB.
 app.post('/signup',async (req,res)=>{
-  //req is request which postman has sent to us
-  //and express has converted this request to an object
-  //and it is given to us to use it and data which we send 
-  //post man body is also the part of this request object
-  //console.log(req);
+ 
+    try{
 
-    // console.log(req.body); // output is undefined coz server is not able to read Json data
-    //to read json data we need help of middleware which check the incomming 
-    //request and convert json into js object the middleware is app.use(express.json())
-    //available in express v4.16.0 ownwards
+      //validate the user
+      validateSignUpData(req);
+
+
+     //encrypt password
+     //https://www.npmjs.com/package/bcrypt -> read docs
+     const{password}=req?.body;
+    const HashPassword= await bcrypt.hash(password, 10);
+     // console.log(HashPassword);
+
 
     const user=new User(req.body);
-    try{
     await user.save();
     res.send("User Added successfully!");
     }catch (err){
