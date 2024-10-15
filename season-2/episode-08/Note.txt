@@ -1,3 +1,5 @@
+
+
 HW
 -explore schemaType options
 -add required, unique, lowercase, min, max,minLength,maxLength,trim

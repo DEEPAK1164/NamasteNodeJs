@@ -1,0 +1,9 @@
+//password must be saved in encrypted format
+//note never ever trust req.body is the
+ data comming from api so attacker
+can send any malicious data
+
+//so we must validate the data
+ before signup and encrypt the
+password then store in db
+
