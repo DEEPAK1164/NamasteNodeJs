@@ -7,3 +7,8 @@ can send any malicious data
  before signup and encrypt the
 password then store in db
 
+-validate data in signup api
+-install bcrypt package and hash password using bcrypt.js
+and save user pwd in hashed form
+-create login api
+-compare password and throw errors if email or pwd invalid
