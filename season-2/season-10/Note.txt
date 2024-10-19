@@ -1,0 +1,12 @@
+Authentication JWT and Cookiess
+//read about cookie hijacking
+install cookie parser
+send dummy cookie to user
+-create dummy get/profile api and check if you get cookie back
+-install json webtoken
+-in login api , after email and password validation , create a JWT token and send it to user.
+in cookie 
+-read the cookie inside your profile api and find the logged in user
+-write userAuth middleware
+-add userAuth middleware in profile api and a new sendConnectionRequest
+-set the expiry of jwt token and cookie for 1 day

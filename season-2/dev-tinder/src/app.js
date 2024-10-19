@@ -4,8 +4,14 @@ const User = require('./models/user');
 const app = express();
 const {validateSignUpData}=require('./utils/validation');
 const bcrypt=require("bcrypt");
+var cookieParser = require('cookie-parser')
+const jwt=require("jsonwebtoken");
+const {userAuth}=require("./middlewares/auth")
 // Middleware (if any)
 app.use(express.json()); // Example middleware to handle JSON requests
+app.use(cookieParser())
+
+
 
 app.post('/signup',async (req,res)=>{
  
@@ -50,6 +56,18 @@ app.post("/login",async(req,res)=>{
 
 if(isPasswordValid)
 {
+//createa JWT Token
+//And the token to cokkie and 
+//https://expressjs.com/en/5x/api.html#res.cookie
+//send the respnse back to the user
+
+const jwttoken=await jwt.sign({_id:user._id},"D**p@k*1164",{expiresIn:"1d"});
+// console.log(jwttoken);
+
+res.cookie("token",jwttoken,{
+  expires:new Date(Date.now()+24*3600000)
+});
+
   res.status(200).send("User logged in successfully!");
 }
 else
@@ -63,124 +81,56 @@ else
 })
 
 
-
-app.get('/user',async(req,res)=>{
-
-const userEmail=req.body.emailId;
+app.get("/profile",userAuth,async(req,res)=>{
 try{
-  //it gives array of objects as per filter criteria
-  const users=await User.find({emailId:userEmail})
-
-  //findOne returns object
-  // const users=await User.findOne({emailId:userEmail})
-  // if(!users) to check object exists or not
-
-  if(users.length===0)
-  {
-    res.status(404).send("User Not Found!")
-  }
-  else
-  {
-    res.send(users);
-  }
-
-}catch(err){
-  res.status(400).send(`Something went wrong!,${err?.message}`)
+  const user=req.user;
+  res.send(user);
 }
+catch(err){
+res.status(400).send("Error :"+err.message);
+}
+
+
+// try{
+//   const cookies=req.cookies;//gives all cookies
+//   // console.log(cookies);// undefined to read 
+//   //cookie we need npm lib cookie parser
+//   //https://www.npmjs.com/package/cookie-parser
+//    const{token}=cookies;
+// if(!token)
+// {
+//   throw new Error("Invalid Token");
+// }
+// //validate token
+// const decodedMsg=await jwt.verify(token,"D**p@k*1164");
+// // console.log(decodedMsg);
+// const{_id}=decodedMsg;
+// // console.log("Logged in user is "+_id);
+// const user=await User.findById(_id);
+// if(!user)
+// {
+//   throw new Error("User does not exists or try again token might get expired.")
+// }
+
+//   res.send(user);
+// }catch(err){
+// res.send("ERRO :"+err.message)
+// }
 
 
 })
 
+app.post("/sendConnectionRequest",userAuth,async(req,res)=>{
 
-//Feed API - GET/feed - get all users from the database
-//https://mongoosejs.com/docs/models.html
-app.get("/feed",async (req,res)=>{
-  try{
-    //throw new Error("Uknown Error occured!");
-    const allUsers= await User.find({});
-    res.send(allUsers);
-  }catch(err){
-    res.status(400).send(`Error fetching all users: ${err?.message}`);
-
-
-  }
- 
-});
+//who is sending connection request?
+const user=req.user;
 
 
 
-app.delete('/delete',async(req,res)=>{
-const userId=req.body.userId;
-try{
-//OR  const user=await User.findOneAndDelete({ _id: userId}).
-// OR  const user=await User.findByIdAndDelete({ _id: userId}).
-const user=await User.findByIdAndDelete(userId);
-
-if(!user)
-{
-  return res.status(404).send("User not found!")
-}
-  return res.send(`user with userId ${userId} deleted successfully!`)
-}catch(err){
-  return res.status(400).send(`Something went wrong!: ${err?.message}`);
-}
-
+  console.log("Sending a connection request");
+  res.send(user.firstName+" send the connection request");
 })
 
-//it ignores the field which are not present in the schema
-app.patch('/update/:userId', async (req, res) => {
-  const userId = req.params?.userId;
-  const data = req.body;
-
-  try {
-    const ALLOWED_UPDATES = [
-      "userId",
-      "photoUrl",
-      "about",
-      "gender",
-      "age",
-      "skills",
-    ];
-
-    // Correcting the check: return the result of the include check
-    const isUpdatesAllowed = Object.keys(data).every((key) => {
-      return ALLOWED_UPDATES.includes(key); // add return here
-    });
-
-    if (!isUpdatesAllowed) {
-      throw new Error("Update not Allowed!");
-    }
-
-    const user = await User.findByIdAndUpdate(
-      { _id: userId },
-      data,
-      { returnDocument: "after", runValidators: true } // changed 'afterUpdate' to 'after'
-    );
-    
-    if (!user) {
-      return res.status(404).send("User not found!");
-    }
-
-    res.send("User updated successfully!");
-  } catch (err) {
-    res.status(400).send("Something went wrong, can't update! " + err.message);
-  }
-});
-
-
-
-// Delete all users API - DELETE /deleteAll
-app.delete('/deleteAll', async (req, res) => {
-  try {
-    const result = await User.deleteMany({});
-    res.send(`Successfully deleted ${result.deletedCount} users.`);
-  } catch (err) {
-    res.status(400).send(`Error deleting users: ${err?.message}`);
-  }
-});
-
-
-// Connect to db 1st then listen to server
 connectDB().then(()=>{
 console.log("DB connected successfully!");
 app.listen(7777,()=>{
