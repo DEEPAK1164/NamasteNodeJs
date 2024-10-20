@@ -10,3 +10,17 @@ in cookie
 -write userAuth middleware
 -add userAuth middleware in profile api and a new sendConnectionRequest
 -set the expiry of jwt token and cookie for 1 day
+
+Imp Concept: there is something called mongoose schema method
+as we have user schema which defines user so can attach some methods to schema
+that is applicable to all users these methods are helper methods
+that is very closely related to user for example when I try to login
+I create jwt token and storing it into the jwt payload
+so this method is very closely related to user
+as every user will have different methods to signing the token
+so instead of signing the token inside post/login api I can get the token from user schema method
+so we can offload jwt creation logic into user schema handler method.
+and these are kind helper method only.
+
+-create userschema method to get jwt
+-create userSchema method to comparePassword(passwordInputByUser)

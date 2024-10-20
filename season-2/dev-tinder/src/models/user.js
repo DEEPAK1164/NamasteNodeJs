@@ -1,5 +1,7 @@
 const mongoose=require("mongoose");
 var validator = require('validator');
+const jwt=require("jsonwebtoken");
+
 const userSchema=new mongoose.Schema({
     firstName:{
         type:String,
@@ -56,6 +58,21 @@ const userSchema=new mongoose.Schema({
     timestamps:true,//it tells when user registered
 }
 );
+
+
+//Must not use arrow fn ever just below
+userSchema.methods.getJWT = async function() {
+    const user = this;
+    
+    try {
+        const token = await jwt.sign({ _id: user._id.toString() }, "D**p@k*1164", { expiresIn: "1d" });
+        console.log("Generated JWT Token:", token);  // Check if the token is being generated correctly
+        return token;
+    } catch (error) {
+        console.error("Error in generating JWT:", error.message);
+        throw new Error("Token generation failed.");
+    }
+};
 
 
 const User=mongoose.model("User",userSchema);

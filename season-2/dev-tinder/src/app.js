@@ -61,12 +61,21 @@ if(isPasswordValid)
 //https://expressjs.com/en/5x/api.html#res.cookie
 //send the respnse back to the user
 
-const jwttoken=await jwt.sign({_id:user._id},"D**p@k*1164",{expiresIn:"1d"});
+// const jwttoken=await jwt.sign({_id:user._id},"D**p@k*1164",{expiresIn:"1d"});
 // console.log(jwttoken);
+// Generate the token
+const token = await user.getJWT();
 
-res.cookie("token",jwttoken,{
-  expires:new Date(Date.now()+24*3600000)
-});
+// Set the token in the cookie, ensure it's valid
+if (token && typeof token === 'string') {
+    res.cookie('token', token, {
+        httpOnly: true, 
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 day
+        
+    });
+} else {
+    throw new Error("Failed to generate a valid token.");
+}
 
   res.status(200).send("User logged in successfully!");
 }
@@ -127,7 +136,7 @@ const user=req.user;
 
 
 
-  console.log("Sending a connection request");
+  // console.log("Sending a connection request");
   res.send(user.firstName+" send the connection request");
 })
 
