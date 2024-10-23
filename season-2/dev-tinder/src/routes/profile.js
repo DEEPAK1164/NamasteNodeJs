@@ -5,7 +5,7 @@ const {userAuth}=require("../middlewares/auth")
 const jwt=require("jsonwebtoken");
 
 
-profileRouter.get("/profile",userAuth,async(req,res)=>{
+profileRouter.get("/profile/view",userAuth,async(req,res)=>{
     try{
       const user=req.user;
       res.send(user);
@@ -45,7 +45,9 @@ profileRouter.get("/profile",userAuth,async(req,res)=>{
     })
     
 
-
+profileRouter.patch("/profile/edit",async(req,res)=>{
+  
+})
 
 
 
