@@ -29,3 +29,5 @@ ignore, interested, accepted, rejected
 //its very bad to build 100 of api in app.js
 //so create express router and handle routing in proper way
 // expres.Router();
+
+HW : forgot password api

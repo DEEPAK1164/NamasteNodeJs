@@ -3,7 +3,7 @@ const User = require('../models/user');
 const profileRouter=express.Router();
 const {userAuth}=require("../middlewares/auth")
 const jwt=require("jsonwebtoken");
-
+const{validateEditProfileData}=require("../utils/validation");
 
 profileRouter.get("/profile/view",userAuth,async(req,res)=>{
     try{
@@ -45,8 +45,31 @@ profileRouter.get("/profile/view",userAuth,async(req,res)=>{
     })
     
 
-profileRouter.patch("/profile/edit",async(req,res)=>{
+profileRouter.patch("/profile/edit", userAuth, async(req,res)=>{
+  try{
+
+  if(!validateEditProfileData(req))
+  {
+   throw new Error("Invalid Edit Request.");
   
+  }
+ 
+  const loggedInUser=req.user;
+
+  // console.log(loggedInUser);
+  Object.keys(req.body).forEach((key)=>(loggedInUser[key]=req.body[key]))
+  // console.log(loggedInUser);
+    await loggedInUser.save();
+res.send("Edit was successfull!");
+
+
+  }catch(err){
+
+  res.status(400).send("ERROR :"+ err?.message);
+
+  }
+
+
 })
 
 
