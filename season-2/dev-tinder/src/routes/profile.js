@@ -4,6 +4,12 @@ const profileRouter=express.Router();
 const {userAuth}=require("../middlewares/auth")
 const jwt=require("jsonwebtoken");
 const{validateEditProfileData}=require("../utils/validation");
+const bcrypt = require("bcryptjs");
+const JWT_SECRET = "D**p@k*1164t"; // Set this securely
+
+
+
+
 
 profileRouter.get("/profile/view",userAuth,async(req,res)=>{
     try{
@@ -72,6 +78,28 @@ res.send("Edit was successfull!");
 
 })
 
+
+
+// Route: Change Password for Logged-in User
+profileRouter.post("/profile/change-password", userAuth, async (req, res) => {
+  try {
+  
+    const { currentPassword, newPassword } = req.body;
+    const loggedInUser = req.user;
+
+    // Check if current password is correct
+    const isMatch = await bcrypt.compare(currentPassword, loggedInUser.password);
+    if (!isMatch) throw new Error("Current password is incorrect.");
+
+    // Hash new password and save
+    loggedInUser.password = await bcrypt.hash(newPassword, 10);
+    await loggedInUser.save();
+
+    res.send("Password changed successfully!");
+  } catch (err) {
+    res.status(400).send("ERROR: " + err.message);
+  }
+});
 
 
 

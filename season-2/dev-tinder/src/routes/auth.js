@@ -7,35 +7,36 @@ const bcrypt=require("bcrypt");
 
 
 
-authRouter.post('/signup',async (req,res)=>{
- 
-    try{
 
-      //validate the user
-      validateSignUpData(req);
+authRouter.post('/signup', async (req, res) => {
+  try {
+    // Validate user data
+    validateSignUpData(req);
 
+    // Encrypt password
+    const { firstName, lastName, emailId, password } = req.body;
+    const HashPassword = await bcrypt.hash(password, 10);
 
-     //encrypt password
-     //https://www.npmjs.com/package/bcrypt -> read docs
-     const{firstName,lastName,emailId,password}=req?.body;
-    const HashPassword= await bcrypt.hash(password, 10);
-     // console.log(HashPassword);
+    // Check if the user already exists
+    const existingUser = await User.findOne({ emailId });
+    if (existingUser) {
+      return res.status(400).send("User with this email already exists.");
+    }
 
-
-    // const user=new User(req.body);
-    const user=new User({
+    // Create a new user
+    const user = new User({
       firstName,
       lastName,
       emailId,
-      password:HashPassword,
+      password: HashPassword,
     });
 
     await user.save();
-    res.send("User Added successfully!");
-    }catch (err){
-      res.status(400).send(`Error saving the user: ${err?.message}`);
-    }
-})
+    res.send("User added successfully!");
+  } catch (err) {
+    res.status(400).send(`Error saving the user: ${err.message}`);
+  }
+});
 
 
 authRouter.post("/login",async(req,res)=>{
