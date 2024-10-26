@@ -5,5 +5,49 @@
 //connection request id
 //the best way is keep it away from userCollection 
 
+//never use arrow fn with pre 
+connectionRequestSchema.pre("save",function(next){
+const connectionRequest=this;
+//check if the fromUserId is same as toUserId
+if(connectionRequest.fromUserId.equals(connectionRequest.toUserId))
+{
+    throw new Error("Can't send connection request to yourself")
+}
+//always call next with pre
+next();
+})
 
-userSchema                      connectionSchema
+
+In this code snippet, a Mongoose pre-save hook is used on a connectionRequestSchema schema to validate data before saving a connection request in MongoDB. Let’s break it down:
+
+Schema Pre-Hook:
+
+connectionRequestSchema.pre("save", function(next) { ... }) is a "pre-save" middleware. Mongoose's pre-save hook allows you to run some logic before a document is saved. Here, it ensures that certain conditions are met before saving the document to the database.
+The hook uses a regular function (not an arrow function) because this should refer to the connectionRequest document being saved. If we used an arrow function, this would refer to the global context, not the document.
+Self-Connection Validation:
+
+if (connectionRequest.fromUserId.equals(connectionRequest.toUserId)) { ... } checks if the fromUserId and toUserId are the same. If they are equal, it throws an error to prevent a user from sending a connection request to themselves.
+The equals method is used here to safely compare fromUserId and toUserId, which are likely MongoDB ObjectIDs. This method is safer than === for comparing ObjectIDs.
+Calling next():
+
+next() is a callback function that must be called to move on to the next middleware or complete the save operation. If you don’t call next(), Mongoose will assume the operation is still in progress and hang indefinitely.
+If an error is thrown (such as when fromUserId equals toUserId), next() is not called, preventing the document from being saved.
+In short, this pre-save hook ensures that users cannot send connection requests to themselves, and it uses a regular function to preserve the this context and avoid errors in referencing the document.
+
+
+
+// Note: suppose there are 1000 people in or app and each send 100 con req then it will become 100000 as collection grows query will become slow and expensive
+so when we scale db it become very tought for db to handle millions of requests
+ that is we need indexes in our db and we can index our db to certain fields
+ so my api becomes faster.
+ //so keep indexes on email id to improve search results 
+ //note : it is the feature of mongodb for unique fields mongodb already 
+// create index on that field ex-email but to self implemen use
+fieldNamme :
+ {
+    unique:true
+ }
+
+
+
+//

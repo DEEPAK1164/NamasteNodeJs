@@ -1,8 +1,5 @@
 const mongoose=require("mongoose");
 
-
-
-
 const connectionRequestSchema=new mongoose.Schema({
 
     fromUserId:{
@@ -26,6 +23,24 @@ const connectionRequestSchema=new mongoose.Schema({
 {
     timestamps:true,
 })
+
+//never use arrow fn with pre 
+connectionRequestSchema.pre("save",function(next){
+const connectionRequest=this;
+//check if the fromUserId is same as toUserId
+if(connectionRequest.fromUserId.equals(connectionRequest.toUserId))
+{
+    throw new Error("Can't send connection request to yourself")
+}
+//always call next with pre
+next();
+})
+
+
+
+// Define compound indexes to optimize queries for connection requests
+connectionRequestSchema.index({ fromUserId: 1, toUserId: 1 });
+connectionRequestSchema.index({ toUserId: 1, fromUserId: 1 });
 
 //model always starts with capital letter
 const ConnectionRequestModel=new mongoose.model("ConnectionRequest",connectionRequestSchema);

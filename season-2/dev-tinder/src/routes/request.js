@@ -37,7 +37,7 @@ if(!toUser)
 //if conn req from p1 to p1 already exist or
 //if there is con req already pending from b to a
 //in both cases user not allowed to send con request
-const existingConnectionRequest=ConnectionRequestModel.findOne({
+const existingConnectionRequest=await ConnectionRequestModel.findOne({
   $or:[
   {fromUserId,toUserId},
   {fromUserId:toUserId,toUserId:fromUserId}
@@ -64,7 +64,7 @@ const connectionRequest=new ConnectionRequestModel({
 
 const data=await connectionRequest.save();
 res.json({
-  message:"Connection Request Sent Successfully",
+  message:"Connection Request :"+req.params.status,
   data,
 })
      }catch(err){
