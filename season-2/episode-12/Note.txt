@@ -1,0 +1,9 @@
+//logical db query and compound indexes
+
+//How to store connection request in Database?
+//1st way make array in schema and store all  
+//connection request id
+//the best way is keep it away from userCollection 
+
+
+userSchema                      connectionSchema
