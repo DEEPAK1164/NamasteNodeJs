@@ -6,7 +6,7 @@ const mongoose=require("mongoose");
 
 const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb+srv://1164dkm:8i9cPB2RTRz3kPTq@namastenode.xfqk0.mongodb.net/devTinder');
+        await mongoose.connect('mongodb+srv://1164dkm:2iBpJ94NCJK5FMw4@namastenode.xfqk0.mongodb.net/devTinder');
     } catch (err) {
         console.error("Database cannot be connected!", err);
         process.exit(1); // Exit process with failure
