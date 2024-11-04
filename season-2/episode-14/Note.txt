@@ -1,0 +1,7 @@
+in feed api suppose dkm is logge din then deepak will only be able
+to view the perofiles as feed of those 
+1.whom dkm has not send con request
+2.dkm has not ignored the perofiles
+3.dkm if not friend of
+4.dkm card himself
+

@@ -64,5 +64,30 @@ res.json({"connections are":data})
 })
 
 
+userRouter.get("/feed",userAuth,(req,res)=>{
+    try{
+
+//user should not see all user cards except
+//1.his own card
+//2.his connections
+//3.ignored people
+//4.already sent the request
+
+//example : rahul(new),[a,b,c,d]
+// raul->a->rejected, r->b->accepted
+
+
+const loggedInUser=req.user;
+
+//find all con requests send or received by loggedin user
+
+
+
+
+    }catch(err){
+        res.status(400).json({message:err.message});
+    }
+})
+
 
 module.exports=userRouter;
