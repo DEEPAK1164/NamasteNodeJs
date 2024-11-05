@@ -5,3 +5,6 @@ to view the perofiles as feed of those
 3.dkm if not friend of
 4.dkm card himself
 
+-logic gor GET/FEED API
+explore $in, $and, $ne & other query parameters
+-pagination

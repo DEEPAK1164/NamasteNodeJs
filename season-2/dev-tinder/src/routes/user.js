@@ -2,6 +2,7 @@ const express=require("express");
 const { userAuth } = require("../middlewares/auth");
 const userRouter=express.Router();
 const ConnectionRequestModel=require("../models/connectionRequest")
+const UserModel=require("../models/user")
 const USER_SAFE_DATA="firstName lastName photoUrl age gender about skills";
 
 //get all the pending connection request for the logged in user
@@ -62,7 +63,9 @@ res.json({"connections are":data})
 
 
 })
-.get("/feed", userAuth, async (req, res) => {
+
+
+userRouter.get("/feed", userAuth, async (req, res) => {
     try {
 
         
@@ -96,10 +99,21 @@ connectionRequests.forEach((req)=>{
     hideUserFromFeed.add(req.toUserId.toString());
 })
 
-console.log(hideUserFromFeed)
+// console.log(hideUserFromFeed)
+const feedusers=await UserModel.find({
+    $and:[
+
+        {_id:{$nin:Array.from(hideUserFromFeed)}},
+        {_id:{$ne:loggedInUser._id}}
+    ]
+    //Array.from(hideUserFromFeed) it convert set into array
+}).select(USER_SAFE_DATA);
+// console.log(feedusers);
+
+
 
         // You might want to filter or modify the response here if needed
-        res.json(connectionRequests); // Send the connection requests as JSON
+        res.json(feedusers); // Send the connection requests as JSON
     } catch (err) {
         res.status(400).json({ message: err.message }); // Handle any errors
     }
