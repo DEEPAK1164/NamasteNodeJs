@@ -62,11 +62,10 @@ res.json({"connections are":data})
 
 
 })
+.get("/feed", userAuth, async (req, res) => {
+    try {
 
-
-userRouter.get("/feed",userAuth,(req,res)=>{
-    try{
-
+        
 //user should not see all user cards except
 //1.his own card
 //2.his connections
@@ -76,18 +75,35 @@ userRouter.get("/feed",userAuth,(req,res)=>{
 //example : rahul(new),[a,b,c,d]
 // raul->a->rejected, r->b->accepted
 
+        const loggedInUser = req.user; // Assuming req.user contains the logged-in user's information
 
-const loggedInUser=req.user;
+        // Fetch connection requests involving the logged-in user
+        const connectionRequests = await ConnectionRequestModel.find({
+            $or: [
+                { fromUserId: loggedInUser._id }, // Requests sent by the user
+                { toUserId: loggedInUser._id }    // Requests received by the user
+            ]
+        }).select("fromUserId toUserId")
+        // .populate("fromUserId","firstName")
+        // .populate("toUserId","firstName"); 
 
-//find all con requests send or received by loggedin user
 
 
-
-
-    }catch(err){
-        res.status(400).json({message:err.message});
-    }
+//hidden users are the users whom loggedIn user want to hide from feed
+    const hideUserFromFeed=new Set();//stores uniques enteries
+connectionRequests.forEach((req)=>{
+    hideUserFromFeed.add(req.fromUserId.toString());
+    hideUserFromFeed.add(req.toUserId.toString());
 })
+
+console.log(hideUserFromFeed)
+
+        // You might want to filter or modify the response here if needed
+        res.json(connectionRequests); // Send the connection requests as JSON
+    } catch (err) {
+        res.status(400).json({ message: err.message }); // Handle any errors
+    }
+});
 
 
 module.exports=userRouter;
