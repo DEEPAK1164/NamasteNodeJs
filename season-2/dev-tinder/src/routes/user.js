@@ -80,6 +80,14 @@ userRouter.get("/feed", userAuth, async (req, res) => {
 
         const loggedInUser = req.user; // Assuming req.user contains the logged-in user's information
 
+        const page=parseInt(req.query.page)||1;
+        let limit=parseInt(req.query.limit)||10;
+        limit=limit>50?50:limit;
+        const skip=(page-1)*limit;
+
+
+
+
         // Fetch connection requests involving the logged-in user
         const connectionRequests = await ConnectionRequestModel.find({
             $or: [
@@ -107,7 +115,7 @@ const feedusers=await UserModel.find({
         {_id:{$ne:loggedInUser._id}}
     ]
     //Array.from(hideUserFromFeed) it convert set into array
-}).select(USER_SAFE_DATA);
+}).select(USER_SAFE_DATA).skip(skip).limit(limit);
 // console.log(feedusers);
 
 

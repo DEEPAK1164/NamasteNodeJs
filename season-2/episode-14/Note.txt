@@ -8,3 +8,12 @@ to view the perofiles as feed of those
 -logic gor GET/FEED API
 explore $in, $and, $ne & other query parameters
 -pagination
+/feed?page=1&limit=10 => first 10 users (1 to 10)
+/feed?page=2&limit=10 => users(11 to 20)
+/feed?page=3&limit=10 => users(21 to 30)
+in mongodb we have 2 important fn 
+1 .skip()
+2 .limit()
+
+example skip(0) , limit(10)=> 1st 10 users
+skip=(page-1)*limit;
