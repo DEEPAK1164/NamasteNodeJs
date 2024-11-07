@@ -1,17 +1,25 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import NavBar from "./components/NavBar"
+import Body from "./components/Body"
+import Login from "./components/Login"
+import Profile from "./components/Profile"
 
 function App() {
  
   return (
     <>
-     <NavBar/>
-     
+
 <BrowserRouter basename="/">
   <Routes>
-    <Route path="/" element={<div>Base Page</div>} />
-    <Route path="/login" element={<div>Login Page</div>}/>
-    <Route path="/test" element={<div>Test Page</div>}/>
+   
+   {/* parent route */}
+    <Route  path="/" element={<Body/>}>
+
+    {/* children routes */}
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/profile" element={<Profile/>}/>
+        
+    </Route>
+
   </Routes>
 </BrowserRouter>
 
