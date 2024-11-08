@@ -72,7 +72,8 @@ authRouter.post("/login",async(req,res)=>{
      throw new Error("Failed to generate a valid token.");
  }
  
-   res.status(200).send("User logged in successfully!");
+ res.send(user);
+  //  res.status(200).send("User logged in successfully!");
  }
  else
  {

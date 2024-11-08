@@ -1,4 +1,6 @@
 # DevTinder Frontend
+
+# Episode-15
 -create vite + react project
 -remove unecessary code
 -configure tailwinf
@@ -23,3 +25,12 @@ Body
    Route=/login=>Login
    Route=/connections=>Connections
    Route=/profile=>Profile
+
+   # Episode-16
+   -create a login page
+   -install axios
+   -solve cors issue
+   -CORS-install cors in backend => add middleware to with configurations:origin, credentials:true 
+   -whenever making api call so pass 
+   axios=>{withCredentials;true} in frontend to get token back to cookie
+   -install redux toolkit https://redux-toolkit.js.org/introduction/getting-started
