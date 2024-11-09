@@ -38,3 +38,12 @@ Body
    -add redux dev tool
    -login and see if data is comming properly
    -navbar updates as user logged in.
+
+   # Episode-17
+   why on refereshing the page user get looged Out even having valid token in brower's cookie but appStore get refreshed to its initial state?
+   in realit user should only get logged out when when cookie get expired.
+   So, How to achieve it?
+   using useSelector in Bdy Component to addUser in user slice when 1st time body component get rendered
+   -u should not be access other routes without login
+   -if token is not present redirect user to login page
+   -Logout

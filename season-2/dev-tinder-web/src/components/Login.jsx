@@ -16,16 +16,12 @@ const navigate=useNavigate();
 
 const handleLogin=async()=>{
 try{
-const res=await axios.post(BASE_URL+"/login",
-  {
-  emailId,
-  password,
-},
-{ headers: { "Content-Type": "application/json" } },
-{
-  withCredentials:true
-}
-);
+  const res = await axios.post(
+    BASE_URL + "/login",
+    { emailId, password },
+    { headers: { "Content-Type": "application/json" }, withCredentials: true }
+  );
+  
 
 //this data which we get pn hitting login api need to be stored in our appStore
 //by dispatch an action
