@@ -13,23 +13,24 @@ const dispatch=useDispatch();
 const navigate=useNavigate();
 const userData=useSelector((store)=>store.user);
 
+const fetchLoggedInUser = async () => {
+  if (userData) return;  // If user is already fetched, no need to make the request
 
-const fetchLoggedInUser=async()=>{
-  if(userData) return;
-  try{
-const res=await axios.get(BASE_URL+"/profile/view",{
-  withCredentials:true,
-})
-dispatch(addUser(res.data));
+  try {
+    const res = await axios.get(BASE_URL + "/profile/view", {
+      withCredentials: true,  // Ensure credentials are sent
+    });
 
-  }catch(err){
-    if(err.status===401)
-    {
-    navigate("/login")
+    dispatch(addUser(res.data));  // Dispatch the user data to Redux store
+  } catch (err) {
+    if (err.response && err.response.status === 401) {
+      navigate("/login");  // Redirect to login if unauthorized
+    } else {
+      console.error("An error occurred while fetching the logged-in user", err);
     }
-   console.error(err);
   }
-}
+};
+
 
 
 //it will happen when 1st time load the component
