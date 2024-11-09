@@ -34,3 +34,7 @@ Body
    -whenever making api call so pass 
    axios=>{withCredentials;true} in frontend to get token back to cookie
    -install redux toolkit https://redux-toolkit.js.org/introduction/getting-started
+   =>configureStore=>Provider=>createSlice=>add reducer to store
+   -add redux dev tool
+   -login and see if data is comming properly
+   -navbar updates as user logged in.
