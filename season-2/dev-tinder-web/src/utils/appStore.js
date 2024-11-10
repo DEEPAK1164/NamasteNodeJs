@@ -9,8 +9,8 @@ const appStore=configureStore({
 reducer:{
     //adding user slice to the appStore
     user:userReducer,
-    feed:feedReducer
-
+    feed:feedReducer,
+   
 
 },
 

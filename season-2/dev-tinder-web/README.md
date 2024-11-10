@@ -47,3 +47,5 @@ Body
    -u should not be access other routes without login
    -if token is not present redirect user to login page
    -Logout Feature
+   -get the feed and add it to the store
+   -build the user card on feed
