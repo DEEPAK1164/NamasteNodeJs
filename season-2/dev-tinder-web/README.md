@@ -48,4 +48,7 @@ Body
    -if token is not present redirect user to login page
    -Logout Feature
    -get the feed and add it to the store
-   -build the user card on feed
+   -build the user card on fee-edit profile feature
+   -show toast message on save of profile.
+   -see all my connections
+   
