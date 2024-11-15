@@ -5,6 +5,8 @@ const ConnectionRequestModel=require("../models/connectionRequest")
 const UserModel=require("../models/user")
 const USER_SAFE_DATA="firstName lastName photoUrl age gender about skills";
 
+
+
 //get all the pending connection request for the logged in user
 userRouter.get("/user/requests/received", userAuth, async(req,res)=>{
     try{
