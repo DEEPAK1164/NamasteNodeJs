@@ -1,21 +1,20 @@
 const express=require("express");
 const authRouter=express.Router();
-
+const jwt=require("jsonwebtoken");
 const {validateSignUpData}=require('../utils/validation');
 const User = require('../models/user');
 const bcrypt=require("bcrypt");
 
-
-
-
 authRouter.post('/signup', async (req, res) => {
   try {
     // Validate user data
-    validateSignUpData(req);
+    validateSignUpData(req); // Assuming this function throws an error if validation fails
+
+    // Destructure user data from the request body
+    const { firstName, lastName, emailId, password } = req.body;
 
     // Encrypt password
-    const { firstName, lastName, emailId, password } = req.body;
-    const HashPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Check if the user already exists
     const existingUser = await User.findOne({ emailId });
@@ -28,13 +27,32 @@ authRouter.post('/signup', async (req, res) => {
       firstName,
       lastName,
       emailId,
-      password: HashPassword,
+      password: hashedPassword,
     });
 
-    await user.save();
-    res.send("User added successfully!");
+    // Save the user to the database
+    const savedUser = await user.save();
+
+    // Generate JWT token
+    const token = await savedUser.getJWT();
+    if (token && typeof token === 'string') {
+      // Set token in a secure HTTP-only cookie
+      res.cookie('token', token, {
+        httpOnly: true,
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 day
+      });
+    }
+
+    // Send success response (excluding password from the response)
+    res.json({
+      message: "User Added Successfully!",
+      data: savedUser,
+    });
+
   } catch (err) {
-    res.status(400).send(`Error saving the user: ${err.message}`);
+    // Log the error internally for debugging, but send a generic error message to the client
+  
+    res.status(400).send("Error saving the user. Please try again.");
   }
 });
 

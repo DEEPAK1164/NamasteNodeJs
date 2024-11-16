@@ -53,9 +53,7 @@ Body
    -page see all my connections
    -page see all my connection requests
    -feature accept/reject connection request
-
-   remaining:
-     -intrested/ignore the user card from the feedpage
-     -Signup new user
-     -Testing end to end
+   -intrested/ignore the user card from the feedpage
+   -Signup new user
+   -Testing end to end
    
