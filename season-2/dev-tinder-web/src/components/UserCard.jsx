@@ -52,7 +52,7 @@ const UserCard = ({ user }) => {
         {/* Age and Gender */}
         {age && gender && (
           <p className="text-white">
-            {`${age} years old, ${gender}`}
+            {`${age}, ${gender}`}
           </p>
         )}
 
