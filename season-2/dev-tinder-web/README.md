@@ -50,5 +50,12 @@ Body
    -get the feed and add it to the store
    -build the user card on fee-edit profile feature
    -show toast message on save of profile.
-   -see all my connections
+   -page see all my connections
+   -page see all my connection requests
+   -feature accept/reject connection request
+
+   remaining:
+     -intrested/ignore the user card from the feedpage
+     -Signup new user
+     -Testing end to end
    
