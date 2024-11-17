@@ -114,7 +114,7 @@ return navigate("/profile");
     <span className="label-text text-white">Password</span>
    
   </div>
-  <input type="text" 
+  <input type="password" 
   value={password} 
   className="input input-bordered w-full max-w-xs bg-primary" 
   onChange={(e)=>setPassword(e.target.value)}/>
