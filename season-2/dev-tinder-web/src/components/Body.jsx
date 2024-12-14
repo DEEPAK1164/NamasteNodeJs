@@ -7,6 +7,8 @@ import axios from 'axios';
 import { BASE_URL } from '../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import backgroundImage from "../images/dev5.webp"; // Import the image
+
 
 function Body() {
 const dispatch=useDispatch();
@@ -40,7 +42,15 @@ useEffect(() => {
 }, [userData]);
 
   return (
-    <div>
+    <div
+     style={{
+        backgroundImage: `url(${backgroundImage})`, // Set the background image
+        backgroundSize: "cover", // Ensure the image covers the container
+        backgroundPosition: "center", // Center the image
+        backgroundRepeat: "no-repeat", // Do not repeat the image
+        minHeight: "100vh", // Ensure the div takes full viewport height
+      }}
+    >
       <NavBar/>
 
       {/* Render child routes here */}
