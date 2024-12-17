@@ -42,7 +42,7 @@ useEffect(() => {
 }, [userData]);
 
   return (
-    <div
+    <div className="mt-20"
      style={{
         backgroundImage: `url(${backgroundImage})`, // Set the background image
         backgroundSize: "cover", // Ensure the image covers the container

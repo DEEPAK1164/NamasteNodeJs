@@ -29,7 +29,7 @@ const handleLogout = async () => {
 
   return (
   
-     <div className="navbar bg-neutral">
+    <div className="navbar bg-neutral fixed h-20 top-0 left-0 w-full z-50">
   <div className="flex-1">
     <Link to="/" className="btn btn-white text-xl">👨🏻‍💻DevTinder</Link>
   </div>
@@ -67,8 +67,6 @@ const handleLogout = async () => {
 
 
   </div>}
-
-
 
 </div>
   
